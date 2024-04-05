@@ -1,8 +1,9 @@
 /* Estilos para el encabezado */
 header {
-    background-color: #333; /* Cambia el color de fondo según tus preferencias */
+    background-color: #293e5d; /* Cambia el color de fondo según tus preferencias */
     padding: 10px 0; /* Añade espacio interno arriba y abajo */
     height: 50px; /* Ajusta la altura del encabezado */
+    font-family: Arial, Helvetica, sans-serif; /* Cambia la fuente del texto según tus preferencias */;
 
 }
 
