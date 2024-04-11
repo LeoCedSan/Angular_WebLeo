@@ -1,39 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-form',
+  imports: [ReactiveFormsModule, CommonModule],
+  standalone: true,
   templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.css']
+  styleUrls: ['./product-form.component.css'],
+  
 })
 export class ProductFormComponent implements OnInit {
-  productForm: FormGroup;
-  selectedFile: File;
+  productForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {
+    this.buildForm();
+  }
 
-  ngOnInit(): void {
+  private buildForm() {
     this.productForm = this.formBuilder.group({
-      // Definición de otros campos del formulario
-      imagen: ['']
+      nombre: ['', Validators.required],
+      precio: ['', [Validators.required, Validators.min(0)]],
+      descripcion: ['', Validators.maxLength(100)],
+      categoria: ['', Validators.required],
+      disponible: [false],
+      imagen: [''],
     });
   }
 
-  onSubmit() {
+  ngOnInit(): void {}
+
+  save(event: Event) {
+    event.preventDefault();
     if (this.productForm.valid) {
-      // Procesar el envío del formulario
+      const value = this.productForm.value;
+      console.log(value);
     } else {
-      // Mostrar errores de validación
-      this.validateAllFormFields(this.productForm);
+      this.productForm.markAllAsTouched();
     }
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
-    // Implementación de la función validateAllFormFields
+  onSubmit() {
+    console.log(this.productForm.value);
   }
 
-  onFileSelected(event) {
-    this.selectedFile = event.target.files[0];
-    // Puedes hacer algo con el archivo seleccionado, como cargarlo a un servicio
+  onFileSelected(event: Event) {
+    console.log((event.target as HTMLInputElement).files);
   }
 }

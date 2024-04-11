@@ -1,53 +1,54 @@
 <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-    <div>
+  <div>
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" formControlName="nombre">
-      <div *ngIf="productForm.get('nombre').invalid && (productForm.get('nombre').dirty || productForm.get('nombre').touched)">
-        <div *ngIf="productForm.get('nombre').errors.required">Nombre es obligatorio.</div>
+      <div *ngIf="productForm.get('nombre')?.invalid && (productForm.get('nombre')?.dirty || productForm.get('nombre')?.touched)">
+          <div *ngIf="productForm.get('nombre')?.errors?.['required']">Nombre es obligatorio.</div>
       </div>
-    </div>
-  
-    <div>
+  </div>
+
+  <div>
       <label for="precio">Precio:</label>
       <input type="number" id="precio" formControlName="precio">
-      <div *ngIf="productForm.get('precio').invalid && (productForm.get('precio').dirty || productForm.get('precio').touched)">
-        <div *ngIf="productForm.get('precio').errors.required">Precio es obligatorio.</div>
-        <div *ngIf="productForm.get('precio').errors.min">El precio no puede ser negativo.</div>
+      <div *ngIf="productForm.get('precio')?.invalid && (productForm.get('precio')?.dirty || productForm.get('precio')?.touched)">
+          <div *ngIf="productForm.get('precio')?.errors?.['required']">Precio es obligatorio.</div>
+          <div *ngIf="productForm.get('precio')?.errors?.['min']">El precio no puede ser negativo.</div>
       </div>
-    </div>
-  
-    <div>
+  </div>
+
+  <div>
       <label for="descripcion">Descripción:</label>
       <textarea id="descripcion" formControlName="descripcion"></textarea>
-      <div *ngIf="productForm.get('descripcion').invalid && (productForm.get('descripcion').dirty || productForm.get('descripcion').touched)">
-        <div *ngIf="productForm.get('descripcion').errors.maxlength">La descripción no puede tener más de 100 caracteres.</div>
+      <div *ngIf="productForm.get('descripcion')?.invalid && (productForm.get('descripcion')?.dirty || productForm.get('descripcion')?.touched)">
+          <div *ngIf="productForm.get('descripcion')?.errors?.['maxlength']">La descripción no puede tener más de 100 caracteres.</div>
       </div>
-    </div>
-  
-    <div>
+  </div>
+
+  <div>
       <label for="categoria">Categoría:</label>
       <select id="categoria" formControlName="categoria">
-        <option value="" disabled selected>Selecciona una categoría</option>
-        <option value="categoria1">Categoría 1</option>
-        <option value="categoria2">Categoría 2</option>
-        <!-- Agregar más opciones si es necesario -->
+          <option value="" disabled selected>Selecciona una categoría</option>
+          <option value="EquipacionL">Equipacion Local</option>
+          <option value="EquipacionV">Equipacion Visitante</option>
+          <option value="EquipacionC">Equipacion Calentamiento 1</option>
+          <option value="EquipacionC2">Equipacion Calentamiento 2</option>
+          <option value="Mochila">Mochila Club</option>
       </select>
-      <div *ngIf="productForm.get('categoria').invalid && (productForm.get('categoria').dirty || productForm.get('categoria').touched)">
-        <div *ngIf="productForm.get('categoria').errors.required">Categoría es obligatoria.</div>
+      <div *ngIf="productForm.get('categoria')?.invalid && (productForm.get('categoria')?.dirty || productForm.get('categoria')?.touched)">
+          <div *ngIf="productForm.get('categoria')?.errors?.['required']">Categoría es obligatoria.</div>
       </div>
-    </div>
-  
-    <div>
+  </div>
+
+  <div>
       <label>
-        <input type="checkbox" formControlName="disponible"> Disponible
+          <input type="checkbox" formControlName="disponible"> Disponible
       </label>
-    </div>
-  
-    <div>
+  </div>
+
+  <div>
       <label for="imagen">Imagen:</label>
       <input type="file" id="imagen" (change)="onFileSelected($event)">
-    </div>
-  
-    <button type="submit" [disabled]="!productForm.valid">Enviar</button>
-  </form>
-  
+  </div>
+
+  <button type="submit" [disabled]="!productForm.valid">Enviar</button>
+</form>
