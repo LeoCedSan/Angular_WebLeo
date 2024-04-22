@@ -19,7 +19,7 @@ export class SendProductsComponent {
   products: products[] = [];
 
   productForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(0), Validators.maxLength(20)]),
     description: new FormControl('', [Validators.required, Validators.maxLength(30)]),
     price: new FormControl('', [
       Validators.required,
