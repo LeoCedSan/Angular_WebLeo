@@ -1,13 +1,4 @@
-footer {
-    background-color: #293e5d;
-    color: white;
-    padding: 20px 0;
-    font-family: Arial, Helvetica, sans-serif; /* Cambia la fuente del texto según tus preferencias */;
+footer{
+    background-color: #395277;
 
-}
-
-.container {
-    max-width: 960px;
-    margin: 0 auto;
-    text-align: center;
 }

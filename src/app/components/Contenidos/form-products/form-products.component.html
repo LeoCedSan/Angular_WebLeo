@@ -1,0 +1,46 @@
+<div class="form-container mt-10">
+    <form class="form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Nombre (máx: 20)*</label>
+            <input type="text" name="name" id="name" formControlName="name" [(ngModel)]="nameValue">
+            @if (nameValue === ''){<p class="error-message">Nombre requerido</p>}
+            @if (nameValue.length > 20){<p class="error-message">Nombre demasiado largo</p>}
+            <label for="description">Descripción (máx: 30)*</label>
+            <textarea name="description" id="description" rows="3" [disabled]="true" formControlName="description" [(ngModel)]="descriptionValue"></textarea>
+            @if (descriptionValue === ''){<p class="error-message">Descripción requerida</p>}
+            @if (descriptionValue.length > 30){<p class="error-message">Descripción demasiado larga</p>}
+        </div>
+        <div class="form-group">
+            <label for="price">Precio*</label>
+            <input type="number" name="price" id="price" formControlName="price" [(ngModel)]="priceValue">
+            @if (priceValue === 0){<p class="error-message">Precio requerido</p>}
+            @if (priceValue < 0){<p class="error-message">Precio inválido</p>}
+                @if (priceValue > 10000){<p class="error-message">Precio demasiado alto</p>}
+        </div>
+        <div class="form-group">
+            <label for="image">Imagen*</label>
+            <input type="file" name="image" id="image" formControlName="image" (change)="onImageSelected($event)">
+        </div>
+        <label for="categoria">Categorías*</label>
+        <select name="categoria" id="categoria" formControlName="categoria" [(ngModel)]="categoriaValue">
+            <option value="" disabled selected>Seleccionar categoría</option>
+            <option value="Equipacion L">Equipación Local</option>
+            <option value="Equipacion V">Equipación Visitante</option>
+            <option value="Equipacion E1">Equipación Entreno 1</option>
+            <option value="Equipacion E2">Equipación Entreno 2</option>
+            <option value="Pantalon F">Pantalon F</option>
+            <option value="Pantalon M">Pantalon M</option>
+            <option value="Chaqueta">Chaqueta</option>
+            <option value="Mochila">Mochila</option>
+        </select>
+        @if (categoriaValue === ''){<p class="error-message">Categoría requerida</p>}
+        <input type="checkbox" name="onSale" id="onSale" formControlName="onSale" [(ngModel)]="onSaleValue">
+        <label for="onSale" class="text-lg">En venta</label>
+        @if(productForm.invalid){
+        <button type="submit" class="submit-button" disabled>Enviar</button>
+        }
+        @else{
+        <button type="submit" onclick="sendReviewsSignal()"class="submit-button">Enviar</button>
+        }
+    </form>
+</div>
